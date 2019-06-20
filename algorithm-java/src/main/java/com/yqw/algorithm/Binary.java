@@ -7,8 +7,7 @@ import org.junit.Test;
  */
 public class Binary {
 
-
-    // 统计一个整数的二进制表示中bit为1的个数
+    // 统计一个整数的二进制表示中bit为1的个数.
     @Test
     public void testBinary() {
         int n = 1;

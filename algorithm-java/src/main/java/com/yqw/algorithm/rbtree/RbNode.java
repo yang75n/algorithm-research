@@ -4,9 +4,9 @@ package com.yqw.algorithm.rbtree;
  * Created by iQiwen on 2019/6/18.
  */
 public class RbNode {
-    int value;
-    Color color;
-    RbNode parent;
-    RbNode left;
-    RbNode right;
+    public int value;
+    public Color color;
+    public RbNode parent;
+    public RbNode left;
+    public RbNode right;
 }
