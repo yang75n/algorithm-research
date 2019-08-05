@@ -114,12 +114,10 @@ public class ApartData {
         File[] f2 = f.listFiles();
         //再新建一个HashMap用来保存每个IP及其出现的次数
         Map<String, Integer> map1 = new HashMap<>();
-
         for (File file : f2) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 Map<Long, Integer> map = new HashMap<>();
-
                 while ((temp = br.readLine()) != null) {
                     ip = Long.valueOf(temp);
                     if (map.containsKey(ip)) {
@@ -130,21 +128,16 @@ public class ApartData {
                     }
                 }
                 br.close();
-
                 Iterator<Long> it = map.keySet().iterator();
-
                 //反向位运算还原IP
 
                 while (it.hasNext()) {
-
                     long l = it.next();
                     long l1 = l >> 24;
                     long l2 = (l - (l1 << 24)) >> 16;
                     long l3 = (l - (l1 << 24) - (l2 << 16)) >> 8;
                     String IP = String.valueOf(l1) + "." + String.valueOf(l2) + "." + String.valueOf(l3) + "." + (l - ((l >> 8) << 8));
                     System.out.println("IP" + IP + "  被访问次数是: " + map.get(l));
-
-
                 }
                 map.clear();
             } catch (FileNotFoundException e) {
@@ -156,7 +149,6 @@ public class ApartData {
             }
 
         }
-
     }
 
     public static void main(String[] args) {
