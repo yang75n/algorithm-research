@@ -1,57 +1,42 @@
 package com.yqw.algorithm.sort;
 
 /**
- * 包含有以下排序算法
- * <p>
- * 直接选择排序
- * <p>
- * 两路选择排序
- * <p>
- * 冒泡排序
- * <p>
- * 双向冒泡排序
- * <p>
- * 简单插入排序
- * <p>
- * 二分插入排序
- * <p>
- * 两路插入排序
- * <p>
- * 堆排序
- * <p>
- * 快排
- * <p>
- * 合并排序
- * <p>
- * 计数排序
  * 2019/6/18.
  */
-public class Sort {
+public class SortUtils {
+
+    /**
+     * 冒泡排序
+     */
+    public static void bubble_sort(int arr[], int len) {
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = 0; j < len - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
+                }
+            }
+        }
+    }
 
     /**
      * 直接选择排序
-     *
-     * @param arr
-     * @param len
      */
-    public void select_sort(int arr[], int len) {
+    public static void select_sort(int arr[], int len) {
         for (int i = 0; i < len; i++) {
-            int max = i;
+            int min = i;//通过下面for循环，选择出最小值
             for (int j = i + 1; j < len; j++) {
-                if (arr[max] > arr[j])
-                    max = j;
+                if (arr[min] > arr[j])
+                    min = j;
             }
-            int tmp = arr[i];
-            arr[i] = arr[max];
-            arr[max] = tmp;
+            //交换
+            swap(arr, i, min);
         }
     }
 
     /**
      * 两路选择排序
-     *
-     * @param arr
-     * @param len
      */
     public void select_2way_sort(int arr[], int len) {
         int tmp, min, max;
@@ -74,26 +59,6 @@ public class Sort {
         }
     }
 
-    /**
-     * 冒泡排序
-     *
-     * @param arr
-     * @param len
-     */
-    public void bubble_sort(int arr[], int len) {
-        for (int i = 0; i < len - 1; ) {
-            int pos = len - 1;
-            for (int j = len - 1; j > i; j--) {
-                if (arr[j] < arr[j - 1]) {
-                    int tmp = arr[j];
-                    arr[j] = arr[j - 1];
-                    arr[j - 1] = tmp;
-                    pos = j;
-                }
-            }
-            i = pos;
-        }
-    }
 
     /**
      * 双冒泡排序
@@ -101,7 +66,7 @@ public class Sort {
      * @param arr
      * @param len
      */
-    public void bubble_2way_sort(int arr[], int len) {
+    public static void bubble_2way_sort(int arr[], int len) {
         int tmp, pos;
         int low = 0, high = len - 1;
         while (low < high) {
@@ -133,11 +98,12 @@ public class Sort {
      * @param arr
      * @param len
      */
-    public void insert_sort(int arr[], int len) {
+    public static void insert_sort(int arr[], int len) {
         for (int i = 1; i < len; i++) {
             int j, key = arr[i];
-            for (j = i; j > 0 && arr[j - 1] > key; j--)
+            for (j = i; j > 0 && arr[j - 1] > key; j--) {
                 arr[j] = arr[j - 1];
+            }
             arr[j] = key;
         }
     }
@@ -218,7 +184,7 @@ public class Sort {
      * @param arr
      * @param len
      */
-    public void heap_sort(int arr[], int len) {
+    public static void heap_sort(int arr[], int len) {
         for (int node = len / 2 - 1; node >= 0; node--)
             heap_adjust(arr, len, node);
 
@@ -239,33 +205,26 @@ public class Sort {
 
     /**
      * 快速排序
-     *
-     * @param arr
-     * @param left
-     * @param right
      */
-    public void quick_sort(int arr[], int left, int right) {
+    public static void quick_sort(int arr[], int left, int right) {
         if (left >= right)
             return;
-
-        swap(arr, left, (left + right) / 2);
-        int index = left;
-        for (int i = left + 1; i <= right; i++)
-            if (arr[i] < arr[left])
-                swap(arr, ++index, i);
-        swap(arr, left, index);
-
+        swap(arr, left, (left + right) / 2);//设置left为基准点
+        int index = left;//index表示小于基准点的索引
+        for (int i = left + 1; i <= right; i++) {
+            if (arr[i] < arr[left]) {
+                swap(arr, ++index, i);//比基准值小的都一次放到左边去
+            }
+        }
+        swap(arr, left, index);//把基准值挪到中间，此时基准值左边的都是小的，右边的都是大的
         quick_sort(arr, left, index - 1);
         quick_sort(arr, index + 1, right);
     }
 
     /**
      * 希尔排序
-     *
-     * @param arr
-     * @param len
      */
-    public void shell_sort(int arr[], int len) {
+    public static void shell_sort(int arr[], int len) {
         for (int d = len / 2; d > 0; d /= 2) {
             d |= 1;
             for (int i = d; i < len; i++) {
@@ -314,8 +273,6 @@ public class Sort {
         for (int i = 1; i < len; i++)
             if (max < arr[i])
                 max = arr[i];
-
-        // int counts[ ++max];
         int counts[] = new int[++max];
         for (int i = 0; i < max; i++)
             counts[i] = 0;

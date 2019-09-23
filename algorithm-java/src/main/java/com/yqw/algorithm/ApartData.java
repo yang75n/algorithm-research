@@ -107,7 +107,7 @@ public class ApartData {
     public void count(String FOLDER) {
 
 //		FileReader fr = null;
-//		BufferedReader br = null;
+////		BufferedReader br = null;
         String temp;
         long ip;
         File f = new File(FOLDER);

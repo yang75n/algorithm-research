@@ -17,6 +17,7 @@ public class Binary {
                 ++c; // 计数器加1
             n >>= 1; // 移位
         }
+
         System.out.println("个数=" + c);
     }
 }

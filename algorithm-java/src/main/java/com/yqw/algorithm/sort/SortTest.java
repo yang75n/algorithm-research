@@ -1,148 +1,114 @@
 package com.yqw.algorithm.sort;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Sort的测试类
+ * SortUtils的测试类
  * 2019/6/18.
  */
 public class SortTest {
 
-    private static Sort sort = new Sort();
     private static final int COUNT = 10;
+    private int[] arr = new int[COUNT];
 
-    public static void main(String[] args) {
-
-        System.out.printf("----------------------------------\n");
-
-
-        int count = COUNT;
-        if (args.length > 1)
-            count = Integer.valueOf(args[1]);
-        if (count < 1)
-            count = 1;
-
-        //int tmp[ count];
-        int tmp[] = new int[count];
-        //srand(time(NULL));
-        System.out.printf("new an array randomly\n");
-        for (int i = 0; i < count; ++i)
-            tmp[i] = new Random().nextInt() % count + 1;
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", tmp[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
-
-        // int arr[ count];
-        int arr[] = new int[count];
-
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.select_sort(arr, count);
-        System.out.printf("%s\n", "select sort");
-        for (int i = 0; i < count; ++i)
+    @Before
+    public void initData() {
+        System.out.printf("new an array randomly :\n");
+        for (int i = 0; i < COUNT; ++i)
+            arr[i] = new Random().nextInt() % COUNT + 1;
+        for (int i = 0; i < COUNT; ++i)
             System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+        System.out.println();//换行
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.select_2way_sort(arr, count);
-        System.out.printf("%s\n", "two way select sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    /**
+     * 百万数据，--
+     * 10万数据，25秒
+     * 1万数据，800毫秒
+     * 1千数据,150毫秒
+     */
+    @Test
+    public void test_bubble_sort() {
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.bubble_sort(arr, count);
-        System.out.printf("%s\n", "bubble sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+        SortUtils.bubble_sort(arr, arr.length);
+        System.out.printf("%s\n", "bubble sort:");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.bubble_2way_sort(arr, count);
-        System.out.printf("%s\n", "two direction bubble sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    /**
+     * 百万数据，--
+     * 10万数据，8秒
+     * 1万数据，600毫秒
+     * 1千数据,125毫秒
+     */
+    @Test
+    public void test_select_sort() {
+        SortUtils.select_sort(arr, arr.length);
+        System.out.printf("%s\n", "select sort:");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.insert_sort(arr, count);
-        System.out.printf("%s\n", "insert sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    @Test
+    public void test_insert_sort() {
+        SortUtils.insert_sort(arr, arr.length);
+        System.out.printf("%s\n", "soerted:");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.insert_binary_sort(arr, count);
-        System.out.printf("%s\n", "binary insert sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    /**
+     * 百万数据，--
+     * 10万数据，15秒
+     * 1万数据，500毫秒
+     * 1千数据,140毫秒
+     */
+    @Test
+    public void test_bubble_2way_sort() {
+        SortUtils.bubble_2way_sort(arr, arr.length);
+        System.out.printf("%s\n", "bubble_2way_sort sort:");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.insert_2way_sort(arr, count);
-        System.out.printf("%s\n", "two way insert sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.heap_sort(arr, count);
-        System.out.printf("%s\n", "heap sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    /**
+     * 百万数据，8秒
+     * 10万数据，1.7秒
+     * 1万数据，350毫秒
+     * 1千数据,125毫秒
+     */
+    @Test
+    public void test_heap_sort() {
+        SortUtils.heap_sort(arr, arr.length);
+        System.out.printf("%s\n", "heap_sort sort:");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.quick_sort(arr, 0, count - 1);
-        System.out.printf("%s\n", "quick sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    /**
+     * 百万数据，8.7秒
+     * 10万数据，1.6秒
+     * 1万数据，400毫秒
+     * 1千数据,140毫秒
+     */
+    @Test
+    public void test_shell_sort() {
+        SortUtils.shell_sort(arr, arr.length);
+        System.out.printf("%s\n", "###############");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.shell_sort(arr, count);
-        System.out.printf("%s\n", "shell sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.merge_sort(arr, 0, count - 1);
-        System.out.printf("%s\n", "merge sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
+    @Test
+    public void test_quick_sort() {
+        SortUtils.quick_sort(arr, 0, arr.length - 1);
+        System.out.printf("%s\n", "sorted:");
+        System.out.println(Arrays.toString(arr));
+    }
 
-        for (int i = 0; i < count; ++i)
-            arr[i] = tmp[i];
-        sort.count_sort(arr, count);
-        System.out.printf("%s\n", "count sort");
-        for (int i = 0; i < count; ++i)
-            System.out.printf("%d ", arr[i]);
-        System.out.printf("\n");
-        System.out.printf("\n");
-
+    @Test
+    public void setArr() {
+        System.out.println("sfsdf");
     }
 }
