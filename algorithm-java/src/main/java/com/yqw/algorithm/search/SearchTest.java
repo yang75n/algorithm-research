@@ -11,15 +11,14 @@ public class SearchTest {
     private static final int COUNT = 10;
     private int[] arr = new int[COUNT];
 
-
     @Before
     public void initData() {
         System.out.printf("new an array randomly :\n");
         for (int i = 0; i < COUNT; ++i)
             arr[i] = new Random().nextInt() % COUNT + 1;
 
+        //排序
         SortUtils.quick_sort(arr, 0, arr.length - 1);
-
 
         for (int i = 0; i < COUNT; ++i)
             System.out.printf("%d ", arr[i]);
@@ -33,10 +32,15 @@ public class SearchTest {
         System.out.println("target= " + index);
     }
 
+    @Test
+    public void testBinarySearch() {
+        int index = SearchUtils.binarySearchSorted(arr, 0);
+        System.out.println("target= " + index);
+    }
 
     @Test
     public void testBinarySearchRecursion() {
-        int index = SearchUtils.binarySearchSortedRecursion(arr, 0,arr.length,0);
+        int index = SearchUtils.binarySearchSortedRecursion(arr, 0, arr.length, 0);
         System.out.println("target= " + index);
     }
 }

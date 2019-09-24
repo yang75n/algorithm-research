@@ -79,7 +79,6 @@ public class SortUtils {
                     pos = i;
                 }
             high = pos;
-
             pos = high;
             for (int i = high; i > low; --i)
                 if (arr[i] < arr[i - 1]) {
@@ -127,7 +126,6 @@ public class SortUtils {
                     high = mid - 1;
                 }
             }
-
             for (int j = i; j > low; --j)
                 arr[j] = arr[j - 1];
             arr[low] = key;
