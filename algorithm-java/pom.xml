@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>leetcode-algorithm-solutions</module>
+        <module>data-structure-and-algorithm</module>
     </modules>
 
     <properties>
